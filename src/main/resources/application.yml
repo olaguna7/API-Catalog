@@ -1,0 +1,24 @@
+management:
+    endpoints:
+        web:
+            base-path: /
+            exposure:
+                include: "*" # Indicates that all the endpoints expose it.
+server:
+    port: 8080 # Indicate the default por tof the application
+    servlet:
+        context-path: /api/catalog # Indicate the default url
+
+
+spring:
+    datasource:
+        url: "jdbc:postgresql://localhost:5432/catalog?autoReconnect=true"
+        username: postgres
+        password: postgres
+        driverClassName: org.postgresql.Driver
+        validation-query: select 1;
+        maxActive: 100
+    jpa:
+        show-sql: false
+        generate-ddl: false
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
