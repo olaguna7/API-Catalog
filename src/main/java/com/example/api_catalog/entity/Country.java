@@ -1,9 +1,6 @@
 package com.example.api_catalog.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -29,15 +26,19 @@ public class Country implements Serializable {
     @Column(name = "enabled", nullable = false)
     private Boolean enabled = Boolean.TRUE;
 
+    @Enumerated(EnumType.STRING)
+    private Continent continent;
+
     public Country() {}
 
-    public Country(Long id, String code, String name, String locale, String timezone, Boolean enabled) {
+    public Country(Long id, String code, String name, String locale, String timezone, Boolean enabled, Continent continent) {
         this.id = id;
         this.code = code;
         this.name = name;
         this.locale = locale;
         this.timezone = timezone;
         this.enabled = enabled;
+        this.continent = continent;
     }
 
     public Long getId() {
@@ -88,15 +89,28 @@ public class Country implements Serializable {
         this.enabled = enabled;
     }
 
+    public Continent getContinent() {
+        return continent;
+    }
+
+    public void setContinent(Continent continent) {
+        this.continent = continent;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Country country = (Country) o;
-        return Objects.equals(id, country.id) && Objects.equals(code, country.code) && Objects.equals(name, country.name) && Objects.equals(locale, country.locale) && Objects.equals(timezone, country.timezone) && Objects.equals(enabled, country.enabled);
+        return Objects.equals(id, country.id) && Objects.equals(code, country.code) &&
+                Objects.equals(name, country.name) &&
+                Objects.equals(locale, country.locale) &&
+                Objects.equals(timezone, country.timezone) &&
+                Objects.equals(enabled, country.enabled) &&
+                Objects.equals(continent, country.continent);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, code, name, locale, timezone, enabled);
+        return Objects.hash(id, code, name, locale, timezone, enabled, continent);
     }
 }
