@@ -22,3 +22,5 @@ spring:
         show-sql: false
         generate-ddl: false
         database-platform: org.hibernate.dialect.PostgreSQLDialect
+        hibernate:
+          ddl-auto: validate    # check if the entities have the same structure in the database the entities have the same structure in the database
